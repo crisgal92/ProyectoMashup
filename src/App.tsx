@@ -37,10 +37,14 @@ function App() {
 
     // Función para obtener el clima
     const obtenerClima = () => {
-        axios.get(`/api/clima/${ciudad}`)
-            .then(response => setClima(response.data))
-            .catch(error => console.error("Error al obtener el clima:", error));
-    };
+    console.log(`Buscando clima para la ciudad: ${ciudad}`); // Agregar este log
+    axios.get(`/api/clima/${ciudad}`)
+        .then(response => {
+            console.log(response.data); // Agregar este log para ver la respuesta
+            setClima(response.data);
+        })
+        .catch(error => console.error("Error al obtener el clima:", error));
+};
 
     useEffect(() => {
         buscarImagenes(); // Llama a la función para buscar imágenes

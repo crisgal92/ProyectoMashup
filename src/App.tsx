@@ -1,13 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 
+// Interfaz para el clima
+interface Clima {
+    main?: {
+        temp?: number;
+    };
+    weather?: Array<{
+        description?: string;
+    }>;
+}
+
+// Interfaz para las imágenes
+interface Imagen {
+    id: string;
+    urls: {
+        small: string;
+    };
+    alt_description: string;
+}
+
 function App() {
-    const [imagenes, setImagenes] = useState([]); // Estado para almacenar imágenes
+    const [imagenes, setImagenes] = useState<Imagen[]>([]); // Estado para almacenar imágenes
     const [keyword, setKeyword] = useState(''); // Estado para la palabra clave de búsqueda
-    const [clima, setClima] = useState({}); // Estado para almacenar datos del clima
+    const [clima, setClima] = useState<Clima>({}); // Estado para almacenar datos del clima
     const [ciudad, setCiudad] = useState('Chihuahua'); // Ciudad por defecto
-    const [ubicacion, setUbicacion] = useState({ lat: null, lng: null }); // Estado para la ubicación
+    const [ubicacion, setUbicacion] = useState<{ lat: number | null; lng: number | null }>({ lat: null, lng: null }); // Estado para la ubicación
 
     // Función para buscar imágenes
     const buscarImagenes = () => {
